@@ -1,0 +1,37 @@
+{% extends "index_admin.html" %} {% block body %}
+<div class="container mt-5">
+  <h2>Admin Dashboard</h2>
+  <table class="table table-bordered text-light">
+    <thead>
+      <tr>
+        <th>Username</th>
+        <th>first name</th>
+        <th>Actions</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for user in users %}
+      <tr>
+        <td>{{ user.username }}</td>
+        <td>{{ user.first_name }}</td>
+        <td>
+          <a
+            href="{% url 'view_user_attendance' user.id %}"
+            class="btn btn-info"
+            >View Attendance</a
+          >
+        </td>
+        
+    </tr>
+    {% endfor %}
+</tbody>
+</table>
+<a href="{% url 'leave_approval' %}" class="btn btn-info"
+  >Leave Approvals</a
+>
+    <a href="{% url 'system_report' %}" class="btn btn-info"
+    >System Report</a
+    >
+</div>
+
+{% endblock body %}

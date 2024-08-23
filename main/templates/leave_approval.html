@@ -1,0 +1,51 @@
+{% extends "index_admin.html" %}
+{% block body %}
+<div class="container mt-5">
+    <h2>Leave Approval</h2>
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th>Username</th>
+                <th>Reason</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Approved</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for request in leave_requests %}
+            {% if not request.approved %}
+            <tr>
+                <td>{{ request.user.username }}</td>
+                <td>{{ request.reason }}</td>
+                <td>{{ request.start_date }}</td>
+                <td>{{ request.end_date }}</td>
+                <td>{{ request.approved }}</td>
+                <td>
+                    <form method="post">
+                        {% csrf_token %}
+                        <input type="hidden" name="leave_id" value="{{ request.id }}">
+                        <button type="submit" name="action" value="approve" class="btn btn-success">Approve</button>
+                    </form>
+                </td>
+            </tr>
+            {% else %}
+            <tr>
+                <td>{{ request.user.username }}</td>
+                <td>{{ request.reason }}</td>
+                <td>{{ request.start_date }}</td>
+                <td>{{ request.end_date }}</td>
+                <td>{{ request.approved }}</td>
+                <td>
+                    
+                </td>
+            </tr>
+            
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+
+{% endblock body %}

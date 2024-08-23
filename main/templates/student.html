@@ -1,0 +1,66 @@
+{% extends "index.html" %} {% block body %}
+<div class="container mt-5">
+ 
+
+  <div class="row mb-4">
+    <div class="col text-light mt-5 text-center">
+      <h2>Welcome to Your Dashboard, {{ request.user.username }}</h2>
+      <!-- Display Profile Picture -->
+      {% if profile_picture %}
+      <img
+        src="{{ profile_picture.picture.url }}"
+        class="rounded-circle mt-5"
+        width="150"
+        height="150"
+      />
+      {% else %}
+      <p>No profile picture uploaded.</p>
+      {% endif %}
+      <div class="mt-2">
+        <button
+          class="btn btn-primary"
+          onclick="location.href='/edit_profile_picture/'"
+        >
+          Edit Profile Picture
+        </button>
+        <input
+          type="file"
+          id="profilePicInput"
+          class="d-none"
+          accept="image/*"
+        />
+      </div>
+    </div>
+  </div>
+
+  <div class="row mb-3">
+    <div class="col text-center">
+      <button
+        class="btn btn-success mx-2"
+        onclick="location.href='/mark_attendance/'"
+        id="markAttendanceBtn"
+      >
+        Mark Attendance
+      </button>
+      <button
+        class="btn btn-warning mx-2"
+        onclick="location.href='/leave_request/'"
+        id="markLeaveBtn"
+      >
+        Mark Leave
+      </button>
+      <button
+        class="btn btn-info mx-2"
+        onclick="location.href='/view_attendance/'"
+        id="viewAttendanceBtn"
+      >
+        View Attendance
+      </button>
+    </div>
+  </div>
+  {% if messages %} {% for message in messages %}
+  <div class="alert alert-warning" role="alert">{{ message }}</div>
+  {% endfor %} {% endif %}
+</div>
+
+{% endblock body %}
